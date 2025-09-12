@@ -1,27 +1,26 @@
-import React from 'react';
-import logo from './assets/vv-logo.png';
-import promo from './assets/vv-banner.jpeg';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Home from "./components/Home";
+import CoursesSection from "./components/CoursesSection";
+import Footer from "./components/Footer";
 
 function App() {
   return (
-    <div className="container">
-      <header className="header">
-        <img src={logo} alt="Versatile Variable Logo" className="logo" />
-        <h1>Versatile Variable</h1>
-      </header>
+    <Router>
+      <Navbar />
+      <Routes>
+        {/* Main Home page (includes Hero + Courses + Footer) */}
+        <Route path="/" element={<Home />} />
 
-      <section className="hero">
-        <h2>Need for Coding</h2>
-        <p>Unlock the future of IT for learners, freshers, and career switchers.</p>
-        <img src={promo} alt="Promo" className="promo-img" />
-        <a href="#contact" className="btn">Join the Movement</a>
-      </section>
+        {/* Individual sections as separate routes */}
+        <Route path="/courses" element={<CoursesSection />} />
+        <Route path="/footer" element={<Footer />} />
 
-      <footer id="contact" className="footer">
-        <p>Contact us at <a href="mailto:hello@versatilevariable.com">hello@versatilevariable.com</a></p>
-        <small>&copy; {new Date().getFullYear()} Versatile Variable</small>
-      </footer>
-    </div>
+        {/* 404 Fallback */}
+        <Route path="*" element={<h2 style={{ textAlign: "center" }}>404 Not Found</h2>} />
+      </Routes>
+    </Router>
   );
 }
 
